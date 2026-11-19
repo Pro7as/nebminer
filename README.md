@@ -32,34 +32,40 @@ Download and unpack:
 wget https://github.com/Pro7as/nebminer/releases/download/v0.7.2/nebminer-0.7.2-linux-x86_64.tar.gz
 tar -xzf nebminer-0.7.2-linux-x86_64.tar.gz && cd nebminer-0.7.2
 ```
-NEB pool (begemod), all cards; `rig1` is your rig name:
+`neb1YOUR_ADDRESS` — your NEB address, `rig1` — your rig name.
+
+**NEB pool (begemod)** — `neb.begemod.xyz:3470`
 ```
+# all cards
 ./nebminer --pool neb.begemod.xyz:3470 --user neb1YOUR_ADDRESS.rig1
-```
-AriaPool:
-```
-./nebminer --pool neb.ariabrain.com:3370 --user neb1YOUR_ADDRESS.rig1
-```
-Only cards 0 and 2:
-```
+# only cards 0 and 2
 ./nebminer --pool neb.begemod.xyz:3470 --user neb1YOUR_ADDRESS.rig1 --devices 0,2
-```
-With a stats file for monitoring (JSON every 10 s):
-```
-./nebminer --pool neb.begemod.xyz:3470 --user neb1YOUR_ADDRESS.rig1 --stats /tmp/nebminer.json
-```
-In the background with a log:
-```
+# in the background with a log
 nohup ./nebminer --pool neb.begemod.xyz:3470 --user neb1YOUR_ADDRESS.rig1 > nebminer.log 2>&1 &
 ```
-As a service (starts with the system, restarts after errors): put your address into `nebminer.service`, then
+
+**AriaPool** — `neb.ariabrain.com:3370`
+```
+# all cards
+./nebminer --pool neb.ariabrain.com:3370 --user neb1YOUR_ADDRESS.rig1
+# only cards 0 and 2
+./nebminer --pool neb.ariabrain.com:3370 --user neb1YOUR_ADDRESS.rig1 --devices 0,2
+# in the background with a log
+nohup ./nebminer --pool neb.ariabrain.com:3370 --user neb1YOUR_ADDRESS.rig1 > nebminer.log 2>&1 &
+```
+
+**Any pool**
+```
+# stats file for monitoring (JSON every 10 s)
+./nebminer --pool neb.begemod.xyz:3470 --user neb1YOUR_ADDRESS.rig1 --stats /tmp/nebminer.json
+```
+As a service (starts with the system, restarts after errors): put your pool and address into the `ExecStart` line of `nebminer.service`, then
 ```
 sudo mkdir -p /opt/nebminer && sudo tar -xzf nebminer-0.7.2-linux-x86_64.tar.gz -C /opt/nebminer --strip-components=1
 sudo cp /opt/nebminer/nebminer.service /etc/systemd/system/
 sudo systemctl daemon-reload && sudo systemctl enable --now nebminer
 journalctl -u nebminer -f
 ```
-
 ### Requirements
 Linux x86_64 (Ubuntu 22.04 / 24.04), NVIDIA driver 575.57 or newer recommended. No CUDA toolkit needed.
 
@@ -99,34 +105,40 @@ Linux x86_64 (Ubuntu 22.04 / 24.04), NVIDIA driver 575.57 or newer recommended. 
 wget https://github.com/Pro7as/nebminer/releases/download/v0.7.2/nebminer-0.7.2-linux-x86_64.tar.gz
 tar -xzf nebminer-0.7.2-linux-x86_64.tar.gz && cd nebminer-0.7.2
 ```
-Пул NEB (begemod), все карты; `rig1` — имя рига:
+`neb1ВАШ_АДРЕС` — ваш адрес NEB, `rig1` — имя рига.
+
+**Пул NEB (begemod)** — `neb.begemod.xyz:3470`
 ```
+# все карты
 ./nebminer --pool neb.begemod.xyz:3470 --user neb1ВАШ_АДРЕС.rig1
-```
-AriaPool:
-```
-./nebminer --pool neb.ariabrain.com:3370 --user neb1ВАШ_АДРЕС.rig1
-```
-Только карты 0 и 2:
-```
+# только карты 0 и 2
 ./nebminer --pool neb.begemod.xyz:3470 --user neb1ВАШ_АДРЕС.rig1 --devices 0,2
-```
-С файлом статистики для мониторинга (JSON каждые 10 с):
-```
-./nebminer --pool neb.begemod.xyz:3470 --user neb1ВАШ_АДРЕС.rig1 --stats /tmp/nebminer.json
-```
-В фоне с журналом:
-```
+# в фоне с журналом
 nohup ./nebminer --pool neb.begemod.xyz:3470 --user neb1ВАШ_АДРЕС.rig1 > nebminer.log 2>&1 &
 ```
-Службой (запуск вместе с системой, перезапуск после сбоев): впишите свой адрес в `nebminer.service`, затем
+
+**AriaPool** — `neb.ariabrain.com:3370`
+```
+# все карты
+./nebminer --pool neb.ariabrain.com:3370 --user neb1ВАШ_АДРЕС.rig1
+# только карты 0 и 2
+./nebminer --pool neb.ariabrain.com:3370 --user neb1ВАШ_АДРЕС.rig1 --devices 0,2
+# в фоне с журналом
+nohup ./nebminer --pool neb.ariabrain.com:3370 --user neb1ВАШ_АДРЕС.rig1 > nebminer.log 2>&1 &
+```
+
+**Любой пул**
+```
+# файл статистики для мониторинга (JSON каждые 10 с)
+./nebminer --pool neb.begemod.xyz:3470 --user neb1ВАШ_АДРЕС.rig1 --stats /tmp/nebminer.json
+```
+Службой (запуск вместе с системой, перезапуск после сбоев): впишите пул и свой адрес в строку `ExecStart` файла `nebminer.service`, затем
 ```
 sudo mkdir -p /opt/nebminer && sudo tar -xzf nebminer-0.7.2-linux-x86_64.tar.gz -C /opt/nebminer --strip-components=1
 sudo cp /opt/nebminer/nebminer.service /etc/systemd/system/
 sudo systemctl daemon-reload && sudo systemctl enable --now nebminer
 journalctl -u nebminer -f
 ```
-
 ### Требования
 Linux x86_64 (Ubuntu 22.04 / 24.04), драйвер NVIDIA от 575.57. CUDA ставить не нужно.
 
